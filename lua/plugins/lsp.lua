@@ -13,7 +13,7 @@ return {
         opts = {},
         dependencies = {
             { "mason-org/mason.nvim",           opts = {} },
-            { "mason-org/mason-lspconfig.nvim", opts = { ensure_installed = { "lua_ls" } } },
+            { "mason-org/mason-lspconfig.nvim", opts = { ensure_installed = { "lua_ls", "intelephense" } } },
             { "j-hui/fidget.nvim",              opts = {} },
             -- Allows extra capabilities provided by blink.cmp
             "saghen/blink.cmp",
