@@ -1,3 +1,33 @@
+local servers = {
+    lua_ls = {
+        -- cmd = { ... },
+        -- filetypes = { ... },
+        -- capabilities = {},
+        settings = {
+            Lua = {
+                completion = {
+                    callSnippet = 'Replace',
+                },
+                -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+                -- diagnostics = { disable = { 'missing-fields' } },
+            },
+        },
+    },
+    intelephense = {},
+    ts_ls = {},
+}
+
+-- Formatters need to be loaded with Mason aswell. See autoformat.lua for needed formatters.
+local formatters = {
+    "prettier",
+    "pretty-php",
+}
+
+
+
+local ensure_installed = vim.tbl_keys(servers or {})
+vim.list_extend(ensure_installed, formatters)
+
 return {
     {
         "folke/lazydev.nvim",
@@ -12,9 +42,32 @@ return {
         "neovim/nvim-lspconfig",
         opts = {},
         dependencies = {
-            { "mason-org/mason.nvim",           opts = {} },
-            { "mason-org/mason-lspconfig.nvim", opts = { ensure_installed = { "lua_ls", "intelephense" } } },
-            { "j-hui/fidget.nvim",              opts = {} },
+            { "mason-org/mason.nvim", opts = {} },
+            {
+                "WhoIsSethDaniel/mason-tool-installer.nvim",
+                opts = {
+                    ensure_installed = ensure_installed
+                }
+            },
+            {
+                "mason-org/mason-lspconfig.nvim",
+                opts = {
+                    ensure_installed = {},
+                    automatic_installation = false,
+                    handlers = {
+                        function(server_name)
+                            local server = servers[server_name] or {}
+                            -- This handles overriding only values explicitly passed
+                            -- by the server configuration above. Useful when disabling
+                            -- certain features of an LSP (for example, turning off formatting for ts_ls)
+                            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities,
+                                server.capabilities or {})
+                            require('lspconfig')[server_name].setup(server)
+                        end,
+                    },
+                }
+            },
+            { "j-hui/fidget.nvim",    opts = {} },
             -- Allows extra capabilities provided by blink.cmp
             "saghen/blink.cmp",
         },
