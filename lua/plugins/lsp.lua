@@ -21,6 +21,7 @@ local servers = {
 local formatters = {
     "prettier",
     "pretty-php",
+    "xmlformatter",
 }
 
 
