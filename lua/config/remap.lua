@@ -9,12 +9,12 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
-vim.keymap.set("n", "<leader>y", '"+y', { desc = "yank to clipboard" })
-vim.keymap.set("v", "<leader>y", '"+y', { desc = "yank to clipboard" })
-vim.keymap.set("n", "<leader>Y", '"+Y', { desc = "Yank to clipboard" })
+vim.keymap.set("n", "<leader>y", '"+y', { desc = "[y]ank to clipboard" })
+vim.keymap.set("v", "<leader>y", '"+y', { desc = "[y]ank to clipboard" })
+vim.keymap.set("n", "<leader>Y", '"+Y', { desc = "[Y]ank to clipboard" })
 
-vim.keymap.set("n", "<leader>d", '"_d', { desc = "delete to void" })
-vim.keymap.set("v", "<leader>d", '"_d', { desc = "delete to void" })
+vim.keymap.set("n", "<leader>d", '"_d', { desc = "[d]elete to void" })
+vim.keymap.set("v", "<leader>d", '"_d', { desc = "[d]elete to void" })
 
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
