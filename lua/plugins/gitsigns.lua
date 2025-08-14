@@ -11,5 +11,8 @@ return {
 				changedelete = { text = "~" },
 			},
 		},
+		config = function()
+			vim.keymap.set("v", "<leader>u", ":Gitsigns stage_hunk", { desc = "git stage selected h[u]nk" })
+		end,
 	},
 }
