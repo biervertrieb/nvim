@@ -97,6 +97,9 @@ return {
 					--  Useful when your language has ways of declaring types without an actual implementation.
 					map("gri", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
 
+					map("ghd", function()
+						vim.lsp.buf.hover()
+					end, "[G]oto [H]overing Definition")
 					-- Jump to the definition of the word under your cursor.
 					--  This is where a variable was first declared, or where a function is defined, etc.
 					--  To jump back, press <C-t>.
